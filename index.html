@@ -95,3 +95,48 @@
 
 </body>
 </html>
+<input type="checkbox" id="admin-menu-toggle" class="admin-checkbox">
+<input type="checkbox" id="session-active" class="admin-checkbox">
+
+<label for="admin-menu-toggle" class="hamburger-admin">
+    <span></span>
+    <span></span>
+    <span></span>
+</label>
+
+<aside class="admin-sidebar">
+    <label for="admin-menu-toggle" class="close-admin">&times;</label>
+    
+    <div class="login-view">
+        <h3>Acceso MICHBOX</h3>
+        <p>Introduce la clave maestra:</p>
+        <div class="password-field">
+            <input type="password" placeholder="Contraseña" class="fake-pass">
+            <label for="session-active" class="btn-auth">Validar Identidad</label>
+        </div>
+    </div>
+
+    <div class="edit-view">
+        <div class="admin-badge">Sesión Activa: Administrador</div>
+        
+        <div class="admin-section">
+            <h4>Subir Nuevo Producto</h4>
+            <form class="admin-form">
+                <input type="text" placeholder="Nombre del accesorio">
+                <input type="number" placeholder="Precio S/.">
+                <textarea placeholder="Descripción del producto"></textarea>
+                <div class="upload-zone">
+                    <input type="file" accept="image/png, image/jpeg">
+                    <span>📁 Subir PNG/JPG</span>
+                </div>
+                <button type="button" class="btn-save">Publicar Ahora</button>
+            </form>
+        </div>
+
+        <div class="admin-section">
+            <h4>Edición Rápida</h4>
+            <p>Modo edición de textos activado en la página principal.</p>
+            <label for="session-active" class="btn-logout">Cerrar Sesión</label>
+        </div>
+    </div>
+</aside>
