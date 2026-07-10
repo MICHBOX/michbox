@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MICH BOX - Pedido</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f5f5f5;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+}
+
+h1{
+    text-align:center;
+    color:#222;
+}
+
+.producto{
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:15px;
+    box-shadow:0 2px 5px rgba(0,0,0,.1);
+}
+
+button{
+    background:#25D366;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.opcion{
+    background:white;
+    border:2px solid #ddd;
+    border-radius:10px;
+    padding:15px;
+    margin:10px 0;
+    cursor:pointer;
+}
+
+.opcion:hover{
+    border-color:#25D366;
+}
+
+.opcion.selected{
+    border-color:#25D366;
+    background:#eafcf1;
+}
+
+#carrito{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    margin-top:20px;
+}
+
+.total{
+    font-size:22px;
+    font-weight:bold;
+    color:#25D366;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>MICH BOX</h1>
+
+<div class="producto">
+    <h3>Vidrio Templado</h3>
+    <p>S/ 8.00</p>
+    <button onclick="agregarProducto('Vidrio Templado',8)">Agregar al carrito</button>
+</div>
+
+<div class="producto">
+    <h3>Cable USB</h3>
+    <p>S/ 10.00</p>
+    <button onclick="agregarProducto('Cable USB',10)">Agregar al carrito</button>
+</div>
+
+<div class="producto">
+    <h3>Audífonos</h3>
+    <p>S/ 18.00</p>
+    <button onclick="agregarProducto('Audífonos',18)">Agregar al carrito</button>
+</div>
+
+<h2>Elige un tipo de entrega</h2>
+
+<div class="opcion" onclick="seleccionarEntrega(this,'Retiro en tienda')">
+📍 Retira tu pedido
+</div>
+
+<div class="opcion" onclick="seleccionarEntrega(this,'Envío Express')">
+⚡ Envío Express
+</div>
+
+<div class="opcion" onclick="seleccionarEntrega(this,'Envío Programado')">
+🚚 Envío en fecha programada
+</div>
+
+<div class="opcion" onclick="seleccionarEntrega(this,'Rango de Fechas')">
+📅 Envío en rango de fechas
+</div>
+
+<div id="carrito">
+<h2>Carrito</h2>
+
+<ul id="listaProductos"></ul>
+
+<p class="total">
+Total: S/ <span id="total">0</span>
+</p>
+
+<button onclick="enviarWhatsApp()">
+Enviar pedido por WhatsApp
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+let carrito = [];
+let total = 0;
+let entrega = "";
+
+function agregarProducto(nombre, precio){
+
+    carrito.push({
+        nombre:nombre,
+        precio:precio
+    });
+
+    total += precio;
+
+    actualizarCarrito();
+}
+
+function actualizarCarrito(){
+
+    let lista = document.getElementById("listaProductos");
+    lista.innerHTML = "";
+
+    carrito.forEach(item=>{
+        lista.innerHTML += `
+        <li>${item.nombre} - S/ ${item.precio}</li>
+        `;
+    });
+
+    document.getElementById("total").textContent = total.toFixed(2);
+}
+
+function seleccionarEntrega(elemento,tipo){
+
+    document.querySelectorAll(".opcion").forEach(op=>{
+        op.classList.remove("selected");
+    });
+
+    elemento.classList.add("selected");
+
+    entrega = tipo;
+}
+
+function enviarWhatsApp(){
+
+    if(carrito.length===0){
+        alert("Agrega al menos un producto");
+        return;
+    }
+
+    if(entrega===""){
+        alert("Selecciona un tipo de entrega");
+        return;
+    }
+
+    let mensaje = "Hola MICH BOX%0A%0A";
+    mensaje += "*Pedido:*%0A";
+
+    carrito.forEach(item=>{
+        mensaje += "- "+item.nombre+" S/"+item.precio+"%0A";
+    });
+
+    mensaje += "%0ATotal: S/"+total.toFixed(2);
+    mensaje += "%0AEntrega: "+entrega;
+
+    let numero = "51999999999";
+
+    window.open(
+        "https://wa.me/"+numero+"?text="+mensaje,
+        "_blank"
+    );
+}
+
+</script>
+
+</body>
+</html>
