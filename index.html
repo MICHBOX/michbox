@@ -3,206 +3,249 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MICH BOX - Pedido</title>
+<title>MICH BOX - Tienda Online</title>
 
 <style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
 body{
-    font-family: Arial, sans-serif;
-    background:#f5f5f5;
-    margin:0;
-    padding:20px;
+background:#f5f7fa;
 }
 
-.container{
-    max-width:800px;
-    margin:auto;
+header{
+background:#0d6efd;
+color:white;
+padding:20px;
+text-align:center;
 }
 
-h1{
-    text-align:center;
-    color:#222;
+header h1{
+font-size:32px;
+}
+
+.productos{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+padding:20px;
 }
 
 .producto{
-    background:white;
-    padding:15px;
-    border-radius:10px;
-    margin-bottom:15px;
-    box-shadow:0 2px 5px rgba(0,0,0,.1);
+background:white;
+border-radius:15px;
+padding:15px;
+box-shadow:0 0 10px rgba(0,0,0,.1);
+text-align:center;
+}
+
+.producto img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.producto h3{
+margin:10px 0;
+}
+
+.precio{
+font-size:22px;
+color:#0d6efd;
+font-weight:bold;
 }
 
 button{
-    background:#25D366;
-    color:white;
-    border:none;
-    padding:10px 15px;
-    border-radius:5px;
-    cursor:pointer;
+background:#0d6efd;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:10px;
+cursor:pointer;
+margin-top:10px;
 }
 
-.opcion{
-    background:white;
-    border:2px solid #ddd;
-    border-radius:10px;
-    padding:15px;
-    margin:10px 0;
-    cursor:pointer;
+button:hover{
+background:#084298;
 }
 
-.opcion:hover{
-    border-color:#25D366;
+.carrito{
+position:fixed;
+top:20px;
+right:20px;
+background:white;
+padding:15px;
+border-radius:15px;
+box-shadow:0 0 10px rgba(0,0,0,.2);
+width:320px;
+max-height:500px;
+overflow:auto;
 }
 
-.opcion.selected{
-    border-color:#25D366;
-    background:#eafcf1;
+.carrito h2{
+margin-bottom:10px;
 }
 
-#carrito{
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    margin-top:20px;
+.item{
+margin-bottom:10px;
+border-bottom:1px solid #ddd;
+padding-bottom:5px;
 }
 
 .total{
-    font-size:22px;
-    font-weight:bold;
-    color:#25D366;
+font-size:22px;
+font-weight:bold;
+margin:15px 0;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:5px 0;
+border:1px solid #ccc;
+border-radius:8px;
 }
 </style>
-
 </head>
+
 <body>
 
-<div class="container">
-
+<header>
 <h1>MICH BOX</h1>
+<p>Tecnología y Accesorios</p>
+</header>
+
+<div class="productos">
 
 <div class="producto">
-    <h3>Vidrio Templado</h3>
-    <p>S/ 8.00</p>
-    <button onclick="agregarProducto('Vidrio Templado',8)">Agregar al carrito</button>
-</div>
-
-<div class="producto">
-    <h3>Cable USB</h3>
-    <p>S/ 10.00</p>
-    <button onclick="agregarProducto('Cable USB',10)">Agregar al carrito</button>
-</div>
-
-<div class="producto">
-    <h3>Audífonos</h3>
-    <p>S/ 18.00</p>
-    <button onclick="agregarProducto('Audífonos',18)">Agregar al carrito</button>
-</div>
-
-<h2>Elige un tipo de entrega</h2>
-
-<div class="opcion" onclick="seleccionarEntrega(this,'Retiro en tienda')">
-📍 Retira tu pedido
-</div>
-
-<div class="opcion" onclick="seleccionarEntrega(this,'Envío Express')">
-⚡ Envío Express
-</div>
-
-<div class="opcion" onclick="seleccionarEntrega(this,'Envío Programado')">
-🚚 Envío en fecha programada
-</div>
-
-<div class="opcion" onclick="seleccionarEntrega(this,'Rango de Fechas')">
-📅 Envío en rango de fechas
-</div>
-
-<div id="carrito">
-<h2>Carrito</h2>
-
-<ul id="listaProductos"></ul>
-
-<p class="total">
-Total: S/ <span id="total">0</span>
-</p>
-
-<button onclick="enviarWhatsApp()">
-Enviar pedido por WhatsApp
+<img src="https://via.placeholder.com/300x220">
+<h3>Xiaomi Sound Pocket</h3>
+<p class="precio">S/ 99</p>
+<button onclick="agregar('Xiaomi Sound Pocket',99)">
+Agregar al carrito
 </button>
+</div>
+
+<div class="producto">
+<img src="https://via.placeholder.com/300x220">
+<h3>LIDIMI LD-S004AC</h3>
+<p class="precio">S/ 89</p>
+<button onclick="agregar('LIDIMI LD-S004AC',89)">
+Agregar al carrito
+</button>
+</div>
+
+<div class="producto">
+<img src="https://via.placeholder.com/300x220">
+<h3>BUYTITI CH-M233</h3>
+<p class="precio">S/ 75</p>
+<button onclick="agregar('BUYTITI CH-M233',75)">
+Agregar al carrito
+</button>
+</div>
 
 </div>
+
+<div class="carrito">
+
+<h2>🛒 Carrito</h2>
+
+<div id="lista"></div>
+
+<div class="total">
+Total: S/ <span id="total">0</span>
+</div>
+
+<input type="text" id="nombre" placeholder="Nombre">
+
+<input type="text" id="direccion" placeholder="Dirección">
+
+<input type="email" id="correo" placeholder="Correo">
+
+<button onclick="enviarWhatsapp()">
+Finalizar Pedido
+</button>
 
 </div>
 
 <script>
 
-let carrito = [];
-let total = 0;
-let entrega = "";
+let carrito=[];
 
-function agregarProducto(nombre, precio){
+function agregar(nombre,precio){
 
-    carrito.push({
-        nombre:nombre,
-        precio:precio
-    });
+carrito.push({
+nombre:nombre,
+precio:precio
+});
 
-    total += precio;
+mostrar();
 
-    actualizarCarrito();
 }
 
-function actualizarCarrito(){
+function mostrar(){
 
-    let lista = document.getElementById("listaProductos");
-    lista.innerHTML = "";
+let lista=document.getElementById("lista");
+lista.innerHTML="";
 
-    carrito.forEach(item=>{
-        lista.innerHTML += `
-        <li>${item.nombre} - S/ ${item.precio}</li>
-        `;
-    });
+let total=0;
 
-    document.getElementById("total").textContent = total.toFixed(2);
+carrito.forEach((item,index)=>{
+
+total+=item.precio;
+
+lista.innerHTML+=`
+<div class="item">
+${item.nombre}
+- S/${item.precio}
+</div>
+`;
+
+});
+
+document.getElementById("total").innerText=total;
+
 }
 
-function seleccionarEntrega(elemento,tipo){
+function enviarWhatsapp(){
 
-    document.querySelectorAll(".opcion").forEach(op=>{
-        op.classList.remove("selected");
-    });
+let nombre=document.getElementById("nombre").value;
+let direccion=document.getElementById("direccion").value;
+let correo=document.getElementById("correo").value;
 
-    elemento.classList.add("selected");
+if(carrito.length===0){
 
-    entrega = tipo;
+alert("Agrega productos al carrito");
+
+return;
+
 }
 
-function enviarWhatsApp(){
+let mensaje="*PEDIDO MICH BOX*%0A%0A";
 
-    if(carrito.length===0){
-        alert("Agrega al menos un producto");
-        return;
-    }
+carrito.forEach(item=>{
 
-    if(entrega===""){
-        alert("Selecciona un tipo de entrega");
-        return;
-    }
+mensaje+=`• ${item.nombre} - S/${item.precio}%0A`;
 
-    let mensaje = "Hola MICH BOX%0A%0A";
-    mensaje += "*Pedido:*%0A";
+});
 
-    carrito.forEach(item=>{
-        mensaje += "- "+item.nombre+" S/"+item.precio+"%0A";
-    });
+let total=document.getElementById("total").innerText;
 
-    mensaje += "%0ATotal: S/"+total.toFixed(2);
-    mensaje += "%0AEntrega: "+entrega;
+mensaje+=`%0ATotal: S/${total}%0A`;
+mensaje+=`Nombre: ${nombre}%0A`;
+mensaje+=`Dirección: ${direccion}%0A`;
+mensaje+=`Correo: ${correo}`;
 
-    let numero = "51999999999";
+window.open(
+`https://wa.me/51926528057?text=${mensaje}`,
+'_blank'
+);
 
-    window.open(
-        "https://wa.me/"+numero+"?text="+mensaje,
-        "_blank"
-    );
 }
 
 </script>
